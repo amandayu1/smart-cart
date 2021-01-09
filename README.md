@@ -1,4 +1,4 @@
-<h1 align="center">SmartCart<h1>
+<h1 align="center">SmartCart</h1>
 
 Users can create a grocery list at home which they can utilize at the grocery store. Users scan items as they pick them up, the items are crossed off the list, and the accumulated total is shown.
 

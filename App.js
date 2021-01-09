@@ -1,21 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, Button, ScrollView, FlatList} from 'react-native';
+import GroceryItem from './components/GroceryItem';
+import ItemInput from './components/ItemInput';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+	
+	const [listItems, setListItems] = useState([]);
+	
+   {/*The list array of item objects with 2 fields*/}
+	const addItemToList = itemDescription => {
+		setListItems( currentList => [...currentList , // take the existing array and add to it
+			{
+				key: Math.random().toString(), // key must be a string
+				value: itemDescription
+			}
+		]);
+	};
+
+	return (
+		<View style={styles.container}>
+			{/*Input Container*/}
+			<ItemInput onAddItem={addItemToList} />
+			
+			{/*Display a list of items*/}
+			<FlatList data={listItems} renderItem={ itemData =>
+				<GroceryItem description={itemData.item.value}/>
+			}/>
+		</View>
+		
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		padding: 50
+	}
 });
